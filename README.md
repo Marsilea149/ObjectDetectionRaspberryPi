@@ -144,6 +144,10 @@ Go to your working directory, and clone the official github repository:
 ```
 git clone https://github.com/tensorflow/examples --depth 1
 ```
+Run this script to install the Python dependencies, and download the TFLite models. 
+```
+sh setup.sh
+```
 When directly running the example code, I encountered this error:
 
 > ImportError: /lib/arm-linux-gnueabihf/libstdc++.so.6: version `GLIBCXX_3.4.29' not found (required by /home/pi/projects/tflite_env/lib/python3.9/site-packages/tensorflow_lite_support/metadata/cc/python/_pywrap_metadata_version.so)
