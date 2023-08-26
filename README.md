@@ -111,7 +111,9 @@ fswebcam -d /dev/video1 -r 1280x720 my_image.jpg
 ### Streaming with your camera using python
 First activate your python virtual environment
 ```
+cd ~/projects
 source tflite_env/bin/activate
+cd ~/projects/ObjectDetectionRaspberryPi
 ```
 Create a new pythonscript named 'retrieve_image.py', with this content:
 ```
@@ -140,10 +142,17 @@ Run script:
 python retrieve_image.py
 ```
 ### Run existing Tensorflow Lite object detection example
+
 Go to your working directory, and clone the official github repository:
 ```
+cd ~/projects
 git clone https://github.com/tensorflow/examples --depth 1
 ```
+
+```
+cd ~/projects/examples/lite/examples/object_detection/raspberry_pi
+```
+
 Run this script to install the Python dependencies, and download the TFLite models. 
 ```
 sh setup.sh
