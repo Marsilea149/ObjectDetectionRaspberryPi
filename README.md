@@ -139,6 +139,58 @@ Run script:
 ```
 python retrieve_image.py
 ```
+### Run existing Tensorflow Lite object detection example
+Go to your working directory, and clone the official github repository:
+```
+git clone https://github.com/tensorflow/examples --depth 1
+```
+When directly running the example code, I encountered this error:
 
+> ImportError: /lib/arm-linux-gnueabihf/libstdc++.so.6: version `GLIBCXX_3.4.29' not found (required by /home/pi/projects/tflite_env/lib/python3.9/site-packages/tensorflow_lite_support/metadata/cc/python/_pywrap_metadata_version.so)
 
+To solve it, I installed tflite-support directly with pip:
+```
+python -m pip install --upgrade tflite-support==0.4.3
+```
 
+Run the example code, remeber to update the cameraId with your device index :
+```
+python3 detect.py \
+  --model efficientdet_lite0.tflite --cameraId 1
+```
+You can run in debug mode with VSCode, you have to add a launch.json file:
+```
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: detect.py",
+            "type": "python",
+            "request": "launch",
+            // "program": "${file}",
+            "program": "${workspaceFolder}/detect.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "args" : [
+                "--cameraId", "1",
+                "--model", "efficientdet_lite0.tflite"
+            ]
+        }
+    ]
+}
+```
+When running the script, you will see: ??? image ???
+
+In this code, the detection result is retrieved with:
+```
+detection_result = detector.detect(input_tensor)
+```
+This is an example of detection result:
+```
+DetectionResult(detections=[Detection(bounding_box=BoundingBox(origin_x=9, origin_y=-1, width=577, height=483), categories=[Category(index=0, score=0.5, display_name='', category_name='person')]), Detection(bounding_box=BoundingBox(origin_x=3, origin_y=8, width=377, height=333), categories=[Category(index=0, score=0.3125, display_name='', category_name='person')])])
+```
+
+#TODO: extract detection result, extract the distance of the tennis ball using the bounding box.  
